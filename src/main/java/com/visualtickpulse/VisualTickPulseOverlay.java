@@ -1,4 +1,4 @@
-package com.example;
+package com.visualtickpulse;
 
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
@@ -12,15 +12,17 @@ import net.runelite.client.ui.overlay.OverlayUtil;
 import javax.inject.Inject;
 import java.awt.*;
 
-public class TickPulseOverlay extends Overlay {
+public class VisualTickPulseOverlay extends Overlay {
 
     private final Client client;
-    private final TickPulsePlugin plugin;
+    private final VisualTickPulsePlugin plugin;
+    private final VisualTickPulseConfig config;
 
     @Inject
-    public TickPulseOverlay(Client client, TickPulsePlugin plugin) {
+    public VisualTickPulseOverlay(Client client, VisualTickPulsePlugin plugin, VisualTickPulseConfig config) {
         this.client = client;
         this.plugin = plugin;
+        this.config = config;
         setPosition(OverlayPosition.DYNAMIC);
         setLayer(OverlayLayer.ABOVE_SCENE);
     }
@@ -36,7 +38,7 @@ public class TickPulseOverlay extends Overlay {
         Polygon tilePoly = Perspective.getCanvasTilePoly(client, localLocation);
 
         // 3. Draw it!
-        if (tilePoly != null) {
+        if (tilePoly != null && config.showSquare()) {
             OverlayUtil.renderPolygon(graphics, tilePoly, Color.CYAN);
         }
 
@@ -47,9 +49,9 @@ public class TickPulseOverlay extends Overlay {
         int tickCycle = plugin.getTickCounter() % 3;
 
         if (tickCycle == 0) {
-            pulseColor = Color.RED;   // The "Action" Tick (Click Spot)
+            pulseColor = config.actionColor(); // Use User's "Action" Color
         } else {
-            pulseColor = Color.WHITE; // The "Setup" Ticks (Cut/Eat)
+            pulseColor = config.setupColor();  // Use User's "Setup" Color
         }
 
         // 3. Calculate Pulse Progress (0% to 100%)

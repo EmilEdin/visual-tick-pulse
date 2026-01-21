@@ -1,4 +1,4 @@
-package com.example;
+package com.visualtickpulse;
 
 import net.runelite.api.events.GameTick;
 import lombok.Getter;
@@ -6,10 +6,7 @@ import lombok.Getter;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
-import net.runelite.api.GameState;
-import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -19,21 +16,21 @@ import net.runelite.client.ui.overlay.OverlayManager;
 
 @Slf4j
 @PluginDescriptor(
-		name = "Tick Pulse"
+		name = "Visual Tick Pulse"
 )
-public class TickPulsePlugin extends Plugin
+public class VisualTickPulsePlugin extends Plugin
 {
 	@Inject
 	private Client client;
 
 	@Inject
-	private TickPulseConfig config;
+	private VisualTickPulseConfig config;
 
 	@Inject
 	private OverlayManager overlayManager;
 
 	@Inject
-	private TickPulseOverlay overlay;
+	private VisualTickPulseOverlay overlay;
 
 	// 1. Variable to store the time of the last tick
 	@Getter
@@ -63,8 +60,8 @@ public class TickPulsePlugin extends Plugin
 	}
 
 	@Provides
-	TickPulseConfig provideConfig(ConfigManager configManager)
+	VisualTickPulseConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(TickPulseConfig.class);
+		return configManager.getConfig(VisualTickPulseConfig.class);
 	}
 }
