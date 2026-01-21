@@ -11,12 +11,24 @@ public interface VisualTickPulseConfig extends Config
 {
 	@Alpha
 	@ConfigItem(
-			keyName = "setupColor",
-			name = "Setup Tick Color",
-			description = "Color for the normal rhythm ticks (1 and 2)",
+			keyName = "setuptick1Color",
+			name = "Tick 1 Color",
+			description = "Color for the normal rhythm tick 1",
 			position = 1
 	)
-	default Color setupColor()
+	default Color setup1Color()
+	{
+		return Color.WHITE;
+	}
+
+	@Alpha
+	@ConfigItem(
+			keyName = "setuptick2Color",
+			name = "Tick 2 Color",
+			description = "Color for the normal rythm tick 2",
+			position = 2
+	)
+	default Color setup2Color()
 	{
 		return Color.WHITE;
 	}
@@ -24,7 +36,7 @@ public interface VisualTickPulseConfig extends Config
 	@Alpha
 	@ConfigItem(
 			keyName = "actionColor",
-			name = "Action Tick Color",
+			name = "Tick 3 Color",
 			description = "Color for the 3rd 'Action' tick",
 			position = 2
 	)
@@ -42,5 +54,17 @@ public interface VisualTickPulseConfig extends Config
 	default boolean showSquare()
 	{
 		return true;
+	}
+
+	@Alpha
+	@ConfigItem(
+			keyName = "borderColor",
+			name = "Border Color",
+			description = "Color of the static square border",
+			position = 4
+	)
+	default Color borderColor()
+	{
+		return Color.CYAN;
 	}
 }

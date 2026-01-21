@@ -39,7 +39,7 @@ public class VisualTickPulseOverlay extends Overlay {
 
         // 3. Draw it!
         if (tilePoly != null && config.showSquare()) {
-            OverlayUtil.renderPolygon(graphics, tilePoly, Color.CYAN);
+            OverlayUtil.renderPolygon(graphics, tilePoly, config.borderColor());
         }
 
         // 1. Setup colors for 3-Tick Rhythm
@@ -50,8 +50,10 @@ public class VisualTickPulseOverlay extends Overlay {
 
         if (tickCycle == 0) {
             pulseColor = config.actionColor(); // Use User's "Action" Color
-        } else {
-            pulseColor = config.setupColor();  // Use User's "Setup" Color
+        } else if (tickCycle == 1){
+            pulseColor = config.setup1Color();  // Use User's "Setup 1" Color
+        } else if (tickCycle == 2) {
+            pulseColor = config.setup2Color();  // Use User's "Setup 1" Color
         }
 
         // 3. Calculate Pulse Progress (0% to 100%)
